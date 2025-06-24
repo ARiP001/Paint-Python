@@ -12,14 +12,11 @@ Aplikasi web sederhana untuk menggambar (paint) berbasis [Streamlit](https://str
 - Download hasil gambar sebagai PNG
 - Tabel data objek gambar (untuk analisis/inspeksi)
 
-## Demo
-![Demo Web Paint Sederhana](https://user-images.githubusercontent.com/your-demo-image.png)
-
 ## Instalasi
 1. **Clone repository ini:**
    ```bash
-   git clone https://github.com/yourusername/web-paint-sederhana.git
-   cd web-paint-sederhana
+   git clone https://github.com/ARiP001/Paint-Python.git
+   cd Paint-Python
    ```
 2. **Install dependencies:**
    ```bash
