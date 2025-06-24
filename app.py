@@ -51,23 +51,14 @@ bg_image = st.sidebar.file_uploader("Background image:", type=["png", "jpg"])
 realtime_update = True
 display_toolbar = True
 
-# --- Ukuran kanvas ---
-canvas_width = 600
-canvas_height = 400
-
-# --- Fix background_image handling ---
-if bg_image is not None:
-    bg_image.seek(0)
-    background_image = Image.open(bg_image).convert("RGB")
-    background_image = background_image.resize((canvas_width, canvas_height))
-    st.image(background_image, caption="Background Preview")
-else:
-    background_image = None
-
 # Konversi hex ke RGB
 fill_color_rgb = fill_color_rgb.lstrip('#')
 r, g, b = tuple(int(fill_color_rgb[i:i+2], 16) for i in (0, 2, 4))
 fill_color_rgba = f"rgba({r}, {g}, {b}, {fill_alpha/255:.2f})"
+
+# --- Ukuran kanvas ---
+canvas_width = 600
+canvas_height = 400
 
 # --- Mapping mode ke st_canvas ---
 mode_map = {
@@ -110,7 +101,7 @@ canvas_result = st_canvas(
     stroke_width=stroke_width,
     stroke_color=stroke_color,
     background_color=bg_color,
-    background_image=background_image,
+    background_image=Image.open(bg_image) if bg_image else None,
     update_streamlit=realtime_update,
     height=canvas_height,
     width=canvas_width,
