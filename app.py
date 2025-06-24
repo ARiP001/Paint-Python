@@ -67,6 +67,9 @@ fill_color_rgba = f"rgba({r}, {g}, {b}, {fill_alpha/255:.2f})"
 canvas_width = 600
 canvas_height = 400
 
+if background_image is not None:
+    canvas_width, canvas_height = background_image.size
+
 # --- Mapping mode ke st_canvas ---
 mode_map = {
     "Free Draw": "freedraw",
