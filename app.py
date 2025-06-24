@@ -56,6 +56,7 @@ background_image = None
 if bg_image is not None:
     bg_image.seek(0)
     background_image = Image.open(bg_image).convert("RGBA")
+    background_image = background_image.resize((canvas_width, canvas_height))
     st.image(background_image, caption="Background Preview")
 
 # Konversi hex ke RGB
@@ -66,9 +67,6 @@ fill_color_rgba = f"rgba({r}, {g}, {b}, {fill_alpha/255:.2f})"
 # --- Ukuran kanvas ---
 canvas_width = 600
 canvas_height = 400
-
-if background_image is not None:
-    canvas_width, canvas_height = background_image.size
 
 # --- Mapping mode ke st_canvas ---
 mode_map = {
