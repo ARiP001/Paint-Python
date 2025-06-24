@@ -56,12 +56,13 @@ canvas_width = 600
 canvas_height = 400
 
 # --- Fix background_image handling ---
-background_image = None
 if bg_image is not None:
     bg_image.seek(0)
     background_image = Image.open(bg_image).convert("RGB")
     background_image = background_image.resize((canvas_width, canvas_height))
     st.image(background_image, caption="Background Preview")
+else:
+    background_image = None
 
 # Konversi hex ke RGB
 fill_color_rgb = fill_color_rgb.lstrip('#')
