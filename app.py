@@ -51,6 +51,12 @@ bg_image = st.sidebar.file_uploader("Background image:", type=["png", "jpg"])
 realtime_update = True
 display_toolbar = True
 
+# --- Fix background_image handling ---
+background_image = None
+if bg_image is not None:
+    bg_image.seek(0)
+    background_image = Image.open(bg_image)
+
 # Konversi hex ke RGB
 fill_color_rgb = fill_color_rgb.lstrip('#')
 r, g, b = tuple(int(fill_color_rgb[i:i+2], 16) for i in (0, 2, 4))
@@ -84,32 +90,6 @@ def pop_redo():
         data = st.session_state.redo_stack.pop()
         st.session_state.undo_stack.append(data)
 
-# --- Tombol kontrol ---
-# col1, col2, col3, col4 = st.columns(4)
-# with col1:
-#     undo = st.button("↩️ Undo")
-# with col2:
-#     redo = st.button("↪️ Redo")
-# with col3:
-#     clear = st.button("🗑️ Clear")
-# with col4:
-#     save = st.button("💾 Save PNG")
-
-# --- Proses Undo/Redo/Clear ---
-# if undo:
-#     pop_undo()
-#     st.session_state.canvas_action = 'undo'
-# elif redo:
-#     pop_redo()
-#     st.session_state.canvas_action = 'redo'
-# elif clear:
-#     st.session_state.undo_stack.clear()
-#     st.session_state.redo_stack.clear()
-#     st.session_state.canvas_image = None
-#     st.session_state.canvas_action = 'clear'
-# else:
-#     st.session_state.canvas_action = None
-
 # --- Ambil data terakhir dari undo_stack untuk ditampilkan ---
 if st.session_state.undo_stack:
     last_data = st.session_state.undo_stack[-1]
@@ -127,7 +107,7 @@ canvas_result = st_canvas(
     stroke_width=stroke_width,
     stroke_color=stroke_color,
     background_color=bg_color,
-    background_image=Image.open(bg_image) if bg_image else None,
+    background_image=background_image,
     update_streamlit=realtime_update,
     height=canvas_height,
     width=canvas_width,
