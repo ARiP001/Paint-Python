@@ -51,6 +51,10 @@ bg_image = st.sidebar.file_uploader("Background image:", type=["png", "jpg"])
 realtime_update = True
 display_toolbar = True
 
+# --- Ukuran kanvas ---
+canvas_width = 600
+canvas_height = 400
+
 # --- Fix background_image handling ---
 background_image = None
 if bg_image is not None:
@@ -63,10 +67,6 @@ if bg_image is not None:
 fill_color_rgb = fill_color_rgb.lstrip('#')
 r, g, b = tuple(int(fill_color_rgb[i:i+2], 16) for i in (0, 2, 4))
 fill_color_rgba = f"rgba({r}, {g}, {b}, {fill_alpha/255:.2f})"
-
-# --- Ukuran kanvas ---
-canvas_width = 600
-canvas_height = 400
 
 # --- Mapping mode ke st_canvas ---
 mode_map = {
