@@ -55,7 +55,8 @@ display_toolbar = True
 background_image = None
 if bg_image is not None:
     bg_image.seek(0)
-    background_image = Image.open(bg_image)
+    background_image = Image.open(bg_image).convert("RGBA")
+    st.image(background_image, caption="Background Preview")
 
 # Konversi hex ke RGB
 fill_color_rgb = fill_color_rgb.lstrip('#')
